@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:swn="http://mycompany.ru/swn">
+
+<ui:composition>
+	<h:form prependId="false" id="growlForm">
+		<p:growl id="growl" showDetail="false" />
+	</h:form>
+	<p:fragment autoUpdate="true">
+		<h:form prependId="false" id="dataForm">
+			<p:panel id="data" toggleable="true" toggleSpeed="250">
+				<f:facet name="header">
+					<h:outputText value="Rental Owner - Search" />
+				</f:facet>
+
+				<h:panelGrid columns="4" cellpadding="5">
+					<p:outputLabel for="name"
+						value="#{messages.label_rental_owner_name}:" />
+					<p:inputText id="name"
+						value="#{rentalOwnerController.criteria.name}" />
+					<p:outputLabel for="lastName"
+						value="#{messages.label_rental_owner_last_name}:" />
+					<p:inputText id="lastName"
+						value="#{rentalOwnerController.criteria.lastName}" />
+					<p:outputLabel for="primaryEmail"
+						value="#{messages.label_rental_owner_primary_email}:" />
+					<p:inputText id="primaryEmail"
+						value="#{rentalOwnerController.criteria.primaryEmail}" />
+					<p:outputLabel for="mobileNumber"
+						value="#{messages.label_rental_owner_mobile_number}:" />
+					<p:inputText id="mobileNumber"
+						value="#{rentalOwnerController.criteria.mobileNumber}" />
+					<p:commandButton value="Search"
+						actionListener="#{rentalOwnerController.search}" />
+					<p:commandButton value="Reset"
+						actionListener="#{rentalOwnerController.reset}" />
+					<p:commandButton value="Create" update="centerContentPanel"
+						actionListener="#{rentalOwnerController.openCreate}" />
+				</h:panelGrid>
+				<p:dataTable id="list" value="#{rentalOwnerController}"
+					var="rentalOwnerDomain" resizableColumns="false" paginator="true"
+					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					selectionMode="single"
+					selection="#{rentalOwnerController.selectedValue}"
+					rowsPerPageTemplate="5,10,25,50" rows="10" lazy="true">
+					<p:column headerText="#{messages.label_rental_owner_name}">
+						<p:outputLabel value="#{rentalOwnerDomain.name}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="#{messages.label_rental_owner_middle_name}">
+						<p:outputLabel value="#{rentalOwnerDomain.middleName}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="#{messages.label_rental_owner_last_name}">
+						<p:outputLabel value="#{rentalOwnerDomain.lastName}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="#{messages.label_rental_owner_primary_email}">
+						<p:outputLabel value="#{rentalOwnerDomain.primaryEmail}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="#{messages.label_rental_owner_mobile_number}">
+						<p:outputLabel value="#{rentalOwnerDomain.mobileNumber}"></p:outputLabel>
+					</p:column>
+					<p:column headerText="#{messages.label_rental_owner_home_phone}">
+						<p:outputLabel value="#{rentalOwnerDomain.homePhone}"></p:outputLabel>
+					</p:column>
+					<p:column styleClass="action-column">
+						<f:facet name="header">
+							<h:outputText value="Actions" />
+						</f:facet>
+						<p:commandButton id="viewButton" icon="ui-icon-view"
+							update="centerContentPanel"
+							action="#{rentalOwnerController.openViewMode(rentalOwnerDomain)}">
+						</p:commandButton>
+						<p:commandButton id="deleteButton" icon="ui-icon-trash"
+							action="#{rentalOwnerController.openViewMode(rentalOwnerDomain)}"
+							update="centerContentPanel">
+							<!-- <swn:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" /> -->
+						</p:commandButton>
+						<p:tooltip for="deleteButton" value="#{messages.label_delete}"
+							showEffect="fade" hideEffect="fade" />
+
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:fragment>
+</ui:composition>
+
+</html>

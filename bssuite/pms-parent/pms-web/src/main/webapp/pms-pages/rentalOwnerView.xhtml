@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form prependId="false" id="viewForm">
+		<p:panel id="data" toggleable="false" toggleSpeed="250">
+			<f:facet name="header">
+				<h:outputText
+					value="#{messages.label_rental_owner} - #{messages.label_view}" />
+			</f:facet>
+			<p:outputPanel id="valueView" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value">
+
+					<p:outputLabel for="name"
+						value="#{messages.label_rental_owner_name}:" />
+					<p:outputLabel id="name"
+						value="#{rentalOwnerController.selectedValue.name}" />
+					<p:outputLabel for="middleName"
+						value="#{messages.label_rental_owner_middle_name}:" />
+					<p:outputLabel id="middleName"
+						value="#{rentalOwnerController.selectedValue.middleName}" />
+					<p:outputLabel for="lastName"
+						value="#{messages.label_rental_owner_last_name}:" />
+					<p:outputLabel id="lastName"
+						value="#{rentalOwnerController.selectedValue.lastName}" />
+
+					<p:outputLabel for="primaryEmail"
+						value="#{messages.label_rental_owner_primary_email}:" />
+					<p:outputLabel id="primaryEmail"
+						value="#{rentalOwnerController.selectedValue.primaryEmail}" />
+					<p:outputLabel for="alternateEmail"
+						value="#{messages.label_rental_owner_alternate_email}:" />
+					<p:outputLabel id="alternateEmail"
+						value="#{rentalOwnerController.selectedValue.alternateEmail}" />
+					<p:outputLabel for="mobileNumber"
+						value="#{messages.label_rental_owner_mobile_number}:" />
+					<p:outputLabel id="mobileNumber"
+						value="#{rentalOwnerController.selectedValue.mobileNumber}" />
+
+					<p:outputLabel for="homePhone"
+						value="#{messages.label_rental_owner_home_phone}:" />
+					<p:outputLabel id="homePhone"
+						value="#{rentalOwnerController.selectedValue.homePhone}" />
+					<p:outputLabel for="comment"
+						value="#{messages.label_rental_owner_comment}:" />
+					<p:outputLabel id="comment" 
+						value="#{rentalOwnerController.selectedValue.comment}" />
+
+
+					<p:commandLink id="ajax-link-view-button"
+						update="centerContentPanel"
+						actionListener="#{rentalOwnerController.openSearch}">
+						<h:outputText value="backButton" />
+					</p:commandLink>
+
+					<p:commandButton value="Back"
+						actionListener="#{rentalOwnerController.openSearch}"
+						update="centerContentPanel" />
+					<p:commandButton value="Copy.."
+						actionListener="#{rentalOwnerController.openEdit}"
+						update="centerContentPanel" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:panel>
+	</h:form>
+</ui:composition>
+</html>
