@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
@@ -29,6 +32,11 @@ public class RentalOwnerDomain extends AbstractPmsDomain implements
 	 */
 	private static final long serialVersionUID = 7443424291621559680L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "id")
+	private long oid;
+	
 	/**
 	 * Rental Owner Name
 	 */
@@ -244,6 +252,14 @@ public class RentalOwnerDomain extends AbstractPmsDomain implements
 		} else if (!primaryEmail.equals(other.primaryEmail))
 			return false;
 		return true;
+	}
+
+	public long getOid() {
+		return oid;
+	}
+
+	public void setOid(long oid) {
+		this.oid = oid;
 	}
 
 }

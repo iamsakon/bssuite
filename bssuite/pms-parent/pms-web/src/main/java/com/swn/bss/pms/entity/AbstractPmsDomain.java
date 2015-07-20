@@ -9,9 +9,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,11 +21,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4539283985100678916L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(name = "id")
-	private long oid;
 
 	/**
      */
@@ -74,13 +66,7 @@ public abstract class AbstractPmsDomain implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	public long getOid() {
-		return oid;
-	}
 
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -141,8 +127,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AbstractPmsDomain [oid=");
-		builder.append(oid);
 		builder.append(", createdDate=");
 		builder.append(createdDate);
 		builder.append(", createdBy=");
@@ -171,7 +155,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result
 				+ ((lastAccessIp == null) ? 0 : lastAccessIp.hashCode());
-		result = prime * result + (int) (oid ^ (oid >>> 32));
 		result = prime * result + (int) (updatedBy ^ (updatedBy >>> 32));
 		result = prime * result
 				+ ((updatedDate == null) ? 0 : updatedDate.hashCode());
@@ -201,8 +184,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 			if (other.lastAccessIp != null)
 				return false;
 		} else if (!lastAccessIp.equals(other.lastAccessIp))
-			return false;
-		if (oid != other.oid)
 			return false;
 		if (updatedBy != other.updatedBy)
 			return false;
