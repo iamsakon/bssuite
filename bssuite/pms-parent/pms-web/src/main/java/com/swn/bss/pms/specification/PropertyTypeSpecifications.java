@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.swn.bss.pms.entity.RentalOwnerDomain;
+import com.swn.bss.pms.entity.PropertyTypeDomain;
 
 /**
  * * A class which is used to create Specification objects which are used to
@@ -20,10 +20,34 @@ import com.swn.bss.pms.entity.RentalOwnerDomain;
  */
 public class PropertyTypeSpecifications {
 
-	public static Specification<RentalOwnerDomain> active() {
-		return new Specification<RentalOwnerDomain>() {
+	public static Specification<PropertyTypeDomain> codeLike(final String name,
+			final long type) {
+		return new Specification<PropertyTypeDomain>() {
+			public Predicate toPredicate(Root<PropertyTypeDomain> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				String likePattern = getLikePattern(name);
+				return cb
+						.like(cb.lower(root.<String> get("code")), likePattern);
+			}
+		};
+	}
+	
+	public static Specification<PropertyTypeDomain> nameLike(final String name,
+			final long type) {
+		return new Specification<PropertyTypeDomain>() {
+			public Predicate toPredicate(Root<PropertyTypeDomain> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				String likePattern = getLikePattern(name);
+				return cb
+						.like(cb.lower(root.<String> get("name")), likePattern);
+			}
+		};
+	}
+	
+	public static Specification<PropertyTypeDomain> active() {
+		return new Specification<PropertyTypeDomain>() {
 
-			public Predicate toPredicate(Root<RentalOwnerDomain> root,
+			public Predicate toPredicate(Root<PropertyTypeDomain> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				return cb.equal(root.get("isActive"), true);
 			}

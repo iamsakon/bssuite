@@ -132,9 +132,6 @@ public class RentalOwnerServiceImpl implements RentalOwnerService {
 		Specification<RentalOwnerDomain> dataActiveSpec = RentalOwnerSpecifications
 				.active();
 
-		// Specifications<RentalOwnerDomain> searchSpec = Specifications
-		// .where(lastNameLikeSpec);
-
 		Specifications<RentalOwnerDomain> searchSpec = Specifications
 				.where(nameLikeSpec).and(lastNameLikeSpec).and(emailLikeSpec)
 				.and(mobileNumberSpec).and(dataActiveSpec);
