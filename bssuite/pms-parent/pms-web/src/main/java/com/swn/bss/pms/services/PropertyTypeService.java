@@ -17,7 +17,7 @@ public interface PropertyTypeService {
 	
 	public PropertyTypeDomain getPropertyType(Long id);
 	
-	public List<PropertyTypeDomain> findRentalOwner(PropertyTypeDomain domain,
+	public List<PropertyTypeDomain> findPropertyType(PropertyTypeDomain domain,
 			int firstResult, int maxResult);
 	
 	public boolean deletePropertyType(Long id);

@@ -13,12 +13,12 @@ import com.swn.bss.pms.entity.PropertySubTypeDomain;
  */
 public interface PropertySubTypeService {
 	
-	public PropertySubTypeDomain savePropertyType(PropertySubTypeDomain domain);	
+	public PropertySubTypeDomain savePropertySubType(PropertySubTypeDomain domain);	
 	
-	public PropertySubTypeDomain getPropertyType(Long id);
+	public PropertySubTypeDomain getPropertySubType(Long id);
 	
-	public List<PropertySubTypeDomain> findRentalOwner(PropertySubTypeDomain domain,
+	public List<PropertySubTypeDomain> findPropertySubType(PropertySubTypeDomain domain,
 			int firstResult, int maxResult);
 	
-	public boolean deletePropertyType(Long id);
+	public boolean deletePropertySubType(Long id);
 }

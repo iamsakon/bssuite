@@ -30,24 +30,24 @@ public class PropertySubTypeServiceImpl implements PropertySubTypeService {
 	PropertySubTypeRepository propertySubTypeRepository;
 	
 	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertySubTypeService#savePropertyType(com.swn.bss.pms.entity.PropertySubTypeDomain)
+	 * @see com.swn.bss.pms.services.PropertySubTypeService#savePropertySubType(com.swn.bss.pms.entity.PropertySubTypeDomain)
 	 */
-	public PropertySubTypeDomain savePropertyType(PropertySubTypeDomain domain) {
+	public PropertySubTypeDomain savePropertySubType(PropertySubTypeDomain domain) {
 		propertySubTypeRepository.save(domain);
 		return domain;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertySubTypeService#getPropertyType(java.lang.Long)
+	 * @see com.swn.bss.pms.services.PropertySubTypeService#getPropertySubType(java.lang.Long)
 	 */
-	public PropertySubTypeDomain getPropertyType(Long id) {
+	public PropertySubTypeDomain getPropertySubType(Long id) {
 		return propertySubTypeRepository.findOne(id);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertySubTypeService#findRentalOwner(com.swn.bss.pms.entity.PropertySubTypeDomain, int, int)
+	 * @see com.swn.bss.pms.services.PropertySubTypeService#PropertySubType(com.swn.bss.pms.entity.PropertySubTypeDomain, int, int)
 	 */
-	public List<PropertySubTypeDomain> findRentalOwner(
+	public List<PropertySubTypeDomain> findPropertySubType(
 			PropertySubTypeDomain domain, int firstResult, int maxResult) {
 		PageRequest pageRequest = new PageRequest(firstResult / maxResult,
 				maxResult);
@@ -70,14 +70,14 @@ public class PropertySubTypeServiceImpl implements PropertySubTypeService {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertySubTypeService#deletePropertyType(java.lang.Long)
+	 * @see com.swn.bss.pms.services.PropertySubTypeService#deletePropertySubType(java.lang.Long)
 	 */
-	public boolean deletePropertyType(Long id) {
+	public boolean deletePropertySubType(Long id) {
 		boolean result = false;
 		try {
-			PropertySubTypeDomain propertySubTypeDomain = this.getPropertyType(id);
+			PropertySubTypeDomain propertySubTypeDomain = this.getPropertySubType(id);
 			propertySubTypeDomain.setActive(false);
-			this.savePropertyType(propertySubTypeDomain);
+			this.savePropertySubType(propertySubTypeDomain);
 			result = true;
 		} catch (Exception ex) {
 			// TODO Remove PrintStackTrace to Logger

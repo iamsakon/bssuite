@@ -56,10 +56,10 @@ public class PropertyTypeServiceImpl implements PropertyTypeService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.swn.bss.pms.services.PropertyTypeService#findRentalOwner(com.swn.
+	 * com.swn.bss.pms.services.PropertyTypeService#findPropertyType(com.swn.
 	 * bss.pms.entity.PropertyTypeDomain, int, int)
 	 */
-	public List<PropertyTypeDomain> findRentalOwner(PropertyTypeDomain domain,
+	public List<PropertyTypeDomain> findPropertyType(PropertyTypeDomain domain,
 			int firstResult, int maxResult) {
 		PageRequest pageRequest = new PageRequest(firstResult / maxResult,
 				maxResult);
