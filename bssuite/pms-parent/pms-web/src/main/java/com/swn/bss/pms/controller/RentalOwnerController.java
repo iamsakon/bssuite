@@ -28,7 +28,7 @@ import com.swn.bss.pms.services.RentalOwnerService;
 @Component
 @ManagedBean
 @SessionScoped
-public class RentalOwnerController extends LazyDataModel<RentalOwnerDomain>
+public class RentalOwnerController extends AbstractMasterController<RentalOwnerDomain>
 		implements Serializable {
 
 	/**
@@ -54,10 +54,6 @@ public class RentalOwnerController extends LazyDataModel<RentalOwnerDomain>
 	private List<RentalOwnerDomain> datasource;
 
 	@PostConstruct
-	public void init() {
-		this.load(1, 10, null, null, null);
-	}
-
 	public void search() {
 		this.load(1, 10, null, null, null);
 	}
@@ -91,15 +87,6 @@ public class RentalOwnerController extends LazyDataModel<RentalOwnerDomain>
 	public void goBack(){
 		this.setCurrentView(this.backScreen);
 	}
-	
-	private void setCurrentView(String newView){
-		FacesContext context = FacesContext.getCurrentInstance();
-		ApplicationBean bean = (ApplicationBean) context.getApplication()
-				.evaluateExpressionGet(context, "#{applicationBean}",
-						ApplicationBean.class);
-		this.backScreen = bean.getCurrentView();
-		bean.setCurrentView(newView);
-	}
 
 	public void saveRentalOwner() {
 		if (this.selectedValue != null) {
@@ -110,7 +97,7 @@ public class RentalOwnerController extends LazyDataModel<RentalOwnerDomain>
 
 	public void reset() {
 		criteria = new RentalOwnerDomain();
-		this.init();
+		this.search();
 	}
 
 	public RentalOwnerService getRentalOwnerService() {
