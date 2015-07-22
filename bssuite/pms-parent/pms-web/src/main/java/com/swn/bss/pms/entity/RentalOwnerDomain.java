@@ -35,7 +35,7 @@ public class RentalOwnerDomain extends AbstractPmsDomain implements
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
-	private long oid;
+	private Long oid;
 	
 	/**
 	 * Rental Owner Name
@@ -254,11 +254,11 @@ public class RentalOwnerDomain extends AbstractPmsDomain implements
 		return true;
 	}
 
-	public long getOid() {
+	public Long getOid() {
 		return oid;
 	}
 
-	public void setOid(long oid) {
+	public void setOid(Long oid) {
 		this.oid = oid;
 	}
 

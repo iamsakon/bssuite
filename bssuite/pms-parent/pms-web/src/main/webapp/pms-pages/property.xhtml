@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:swn="http://mycompany.ru/swn">
+
+<ui:composition>
+	<h:form prependId="false" id="growlForm">
+		<p:growl id="growl" showDetail="false" />
+	</h:form>
+	<p:fragment autoUpdate="true">
+		<h:form prependId="false" id="dataForm">
+			<p:panel id="data" toggleable="true" toggleSpeed="250">
+				<f:facet name="header">
+					<h:outputText value="Rental Owner - Search" />
+				</f:facet>
+				<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+
+				</h:panelGrid>
+				<p:dataTable id="list" value="#{propertyController}"
+					var="propertyDomain" resizableColumns="false" paginator="true"
+					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					selectionMode="single"
+					selection="#{propertyController.selectedValue}"
+					rowsPerPageTemplate="5,10,25,50" rows="10" lazy="true">
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</p:fragment>
+</ui:composition>
+</html>10

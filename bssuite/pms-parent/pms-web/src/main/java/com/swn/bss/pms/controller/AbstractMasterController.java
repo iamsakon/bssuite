@@ -11,7 +11,13 @@ public class AbstractMasterController<T> extends LazyDataModel<T>{
 	 */
 	private static final long serialVersionUID = 8212532190577685616L;
 	
-	private String backScreen = "";
+	protected String searchScreen = "";
+	
+	protected String viewScreen = "";
+	
+	protected String editScreen = "";
+	
+	protected String backScreen = "";
 
 	protected void setCurrentView(String newView){
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -20,6 +26,10 @@ public class AbstractMasterController<T> extends LazyDataModel<T>{
 						ApplicationBean.class);
 		this.backScreen = bean.getCurrentView();
 		bean.setCurrentView(newView);
+	}
+	
+	protected void goBack(){
+		this.setCurrentView(this.getBackScreen());
 	}
 	
 	public String getBackScreen() {

@@ -36,14 +36,6 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	 */
 	private static final long serialVersionUID = -4505793523777164945L;
 	
-	private String searchScreen = "../pms-pages/rentalOwner.xhtml";
-	
-	private String viewScreen = "../pms-pages/rentalOwnerView.xhtml";
-	
-	private String editScreen = "../pms-pages/rentalOwnerEdit.xhtml";
-	
-	private String backScreen = "";
-
 	@Autowired
 	RentalOwnerService rentalOwnerService;
 
@@ -53,6 +45,12 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 
 	private List<RentalOwnerDomain> datasource;
 
+	public RentalOwnerController(){
+		searchScreen = "../pms-pages/rentalOwner.xhtml";
+		viewScreen = "../pms-pages/rentalOwnerView.xhtml";
+		editScreen = "../pms-pages/rentalOwnerEdit.xhtml";
+	}
+	
 	@PostConstruct
 	public void search() {
 		this.load(1, 10, null, null, null);
@@ -82,10 +80,6 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	public void openCreate() {
 		this.selectedValue = new RentalOwnerDomain();
 		this.setCurrentView(this.editScreen);
-	}
-	
-	public void goBack(){
-		this.setCurrentView(this.backScreen);
 	}
 
 	public void saveRentalOwner() {
@@ -132,6 +126,7 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	}
 
 	public int getRowCount() {
+		//TOOD getRowCount()
 		return 1;
 	}
 
