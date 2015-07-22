@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.swn.bss.pms.entity.PropertyTypeDomain;
 
 /**
- * * A class which is used to create Specification objects which are used to
+ * A class which is used to create Specification objects which are used to
  * create JPA criteria queries for PropertyTypeDomain information.
  * 
  * @author MrMai
