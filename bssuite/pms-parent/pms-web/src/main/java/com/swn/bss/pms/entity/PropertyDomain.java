@@ -5,11 +5,13 @@ package com.swn.bss.pms.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -83,6 +85,14 @@ public class PropertyDomain extends AbstractPmsDomain {
     @Column(name = "zipcode")
     @Size(max = 128)
     private String zipcode;
+    
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PropertySubTypeDomain propertySubType;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RentalOwnerDomain rentalOwner;
+    
 	public Long getOid() {
 		return oid;
 	}
@@ -145,6 +155,10 @@ public class PropertyDomain extends AbstractPmsDomain {
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((oid == null) ? 0 : oid.hashCode());
+		result = prime * result
+				+ ((propertySubType == null) ? 0 : propertySubType.hashCode());
+		result = prime * result
+				+ ((rentalOwner == null) ? 0 : rentalOwner.hashCode());
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
@@ -192,6 +206,16 @@ public class PropertyDomain extends AbstractPmsDomain {
 				return false;
 		} else if (!oid.equals(other.oid))
 			return false;
+		if (propertySubType == null) {
+			if (other.propertySubType != null)
+				return false;
+		} else if (!propertySubType.equals(other.propertySubType))
+			return false;
+		if (rentalOwner == null) {
+			if (other.rentalOwner != null)
+				return false;
+		} else if (!rentalOwner.equals(other.rentalOwner))
+			return false;
 		if (zipcode == null) {
 			if (other.zipcode != null)
 				return false;
@@ -218,8 +242,24 @@ public class PropertyDomain extends AbstractPmsDomain {
 		builder.append(city);
 		builder.append(", zipcode=");
 		builder.append(zipcode);
+		builder.append(", propertySubType=");
+		builder.append(propertySubType);
+		builder.append(", rentalOwner=");
+		builder.append(rentalOwner);
 		builder.append("]");
 		return builder.toString();
+	}
+	public PropertySubTypeDomain getPropertySubType() {
+		return propertySubType;
+	}
+	public void setPropertySubType(PropertySubTypeDomain propertySubType) {
+		this.propertySubType = propertySubType;
+	}
+	public RentalOwnerDomain getRentalOwner() {
+		return rentalOwner;
+	}
+	public void setRentalOwner(RentalOwnerDomain rentalOwner) {
+		this.rentalOwner = rentalOwner;
 	}
 	
 }
