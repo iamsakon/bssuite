@@ -71,4 +71,6 @@ public interface RentalOwnerService {
 	 */
 	public List<RentalOwnerDomain> findRentalOwner(RentalOwnerDomain domain,
 			int firstResult, int maxResult);
+	
+	public List<RentalOwnerDomain> loadAll();
 }

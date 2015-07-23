@@ -141,4 +141,8 @@ public class RentalOwnerServiceImpl implements RentalOwnerService {
 		return pageResult.getContent();
 	}
 
+	public List<RentalOwnerDomain> loadAll() {
+		return rentalOwnerRepository.findByIsActive(true);
+	}
+
 }

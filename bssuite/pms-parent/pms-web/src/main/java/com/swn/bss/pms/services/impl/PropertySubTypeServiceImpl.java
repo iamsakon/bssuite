@@ -86,4 +86,8 @@ public class PropertySubTypeServiceImpl implements PropertySubTypeService {
 		return result;
 	}
 
+	public List<PropertySubTypeDomain> loadAll() {
+		return propertySubTypeRepository.findByIsActive(true);
+	}
+
 }

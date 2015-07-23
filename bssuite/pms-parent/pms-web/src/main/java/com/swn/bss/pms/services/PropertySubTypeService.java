@@ -17,6 +17,8 @@ public interface PropertySubTypeService {
 	
 	public PropertySubTypeDomain getPropertySubType(Long id);
 	
+	public List<PropertySubTypeDomain> loadAll();
+	
 	public List<PropertySubTypeDomain> findPropertySubType(PropertySubTypeDomain domain,
 			int firstResult, int maxResult);
 	

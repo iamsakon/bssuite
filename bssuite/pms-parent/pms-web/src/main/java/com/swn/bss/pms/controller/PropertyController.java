@@ -15,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.swn.bss.pms.entity.PropertyDomain;
+import com.swn.bss.pms.entity.PropertySubTypeDomain;
+import com.swn.bss.pms.entity.RentalOwnerDomain;
 import com.swn.bss.pms.services.PropertyService;
+import com.swn.bss.pms.services.PropertySubTypeService;
+import com.swn.bss.pms.services.RentalOwnerService;
 
 /**
  * @author MrMai
@@ -32,12 +36,21 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 
 	@Autowired
 	PropertyService propertyService;
+	@Autowired
+	PropertySubTypeService propertySubTypeService;
+	@Autowired
+	RentalOwnerService rentalOwnerService;
 	
 	private PropertyDomain selectedValue;
 
 	private PropertyDomain criteria = new PropertyDomain();
 
 	private List<PropertyDomain> datasource;
+	
+	//**************************
+	List<RentalOwnerDomain> listRentalOwnerDomain;
+	List<PropertySubTypeDomain> listPropertySubType;
+	//**************************
 	
 	public PropertyController(){
 		searchScreen = "../pms-pages/property.xhtml";
@@ -46,6 +59,13 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 	}	
 	
 	@PostConstruct
+	public void init(){
+		listRentalOwnerDomain = rentalOwnerService.loadAll();
+		listPropertySubType = propertySubTypeService.loadAll();
+		this.search();
+	}
+	
+	
 	public void search() {
 		this.load(1, 10, null, null, null);
 	}
@@ -115,5 +135,55 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 		// TODO Add Feature filters
 		// TODO Add Feature sortOrder
 		return datasource;
+	}
+
+	public PropertyService getPropertyService() {
+		return propertyService;
+	}
+
+	public void setPropertyService(PropertyService propertyService) {
+		this.propertyService = propertyService;
+	}
+
+	public PropertyDomain getSelectedValue() {
+		return selectedValue;
+	}
+
+	public void setSelectedValue(PropertyDomain selectedValue) {
+		this.selectedValue = selectedValue;
+	}
+
+	public PropertyDomain getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(PropertyDomain criteria) {
+		this.criteria = criteria;
+	}
+
+	public List<PropertyDomain> getDatasource() {
+		return datasource;
+	}
+
+	public void setDatasource(List<PropertyDomain> datasource) {
+		this.datasource = datasource;
+	}
+
+	public List<RentalOwnerDomain> getListRentalOwnerDomain() {
+		return listRentalOwnerDomain;
+	}
+
+	public void setListRentalOwnerDomain(
+			List<RentalOwnerDomain> listRentalOwnerDomain) {
+		this.listRentalOwnerDomain = listRentalOwnerDomain;
+	}
+
+	public List<PropertySubTypeDomain> getListPropertySubType() {
+		return listPropertySubType;
+	}
+
+	public void setListPropertySubType(
+			List<PropertySubTypeDomain> listPropertySubType) {
+		this.listPropertySubType = listPropertySubType;
 	}
 }
