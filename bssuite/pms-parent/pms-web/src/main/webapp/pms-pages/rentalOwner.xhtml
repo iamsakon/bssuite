@@ -15,10 +15,10 @@
 		<h:form prependId="false" id="dataForm">
 			<p:panel id="data" toggleable="true" toggleSpeed="250">
 				<f:facet name="header">
-					<h:outputText value="Rental Owner - Search" />
+					<h:outputText value="#{messages.label_rental_owner} - #{messages.label_search}" />
 				</f:facet>
 
-				<h:panelGrid columns="4" cellpadding="5">
+				<h:panelGrid columns="4" cellpadding="5" >
 					<p:outputLabel for="name"
 						value="#{messages.label_rental_owner_name}:" />
 					<p:inputText id="name"

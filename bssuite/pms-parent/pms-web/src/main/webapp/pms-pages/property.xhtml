@@ -13,10 +13,19 @@
 		<h:form prependId="false" id="dataForm">
 			<p:panel id="data" toggleable="true" toggleSpeed="250">
 				<f:facet name="header">
-					<h:outputText value="Rental Owner - Search" />
+					<h:outputText
+						value="#{messages.label_property} - #{messages.label_search}" />
 				</f:facet>
 				<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
-
+					<p:outputLabel for="code"
+						value="#{messages.label_property_code}:" />
+					<p:inputText id="code"
+						value="#{propertyController.criteria.code}" />
+				
+				<p:outputLabel for="name"
+					value="#{messages.label_property_name}:" />
+				<p:inputText id="name"
+					value="#{propertyController.criteria.name}" />
 				</h:panelGrid>
 				<p:dataTable id="list" value="#{propertyController}"
 					var="propertyDomain" resizableColumns="false" paginator="true"
@@ -30,4 +39,4 @@
 		</h:form>
 	</p:fragment>
 </ui:composition>
-</html>10
+</html>

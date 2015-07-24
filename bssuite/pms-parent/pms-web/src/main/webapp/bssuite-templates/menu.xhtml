@@ -8,9 +8,11 @@
 	<h:form>
 		<p:menubar>
 			<p:submenu label="File" icon="ui-icon-document">
-				<p:submenu label="New" icon="ui-icon-contact">
-					<p:menuitem value="Project" url="#" />
-					<p:menuitem value="Other" url="#" />
+				<p:submenu label="Property Management" icon="ui-icon-contact">
+					<p:menuitem value="Rental Owner"
+						action="#{applicationBean.setCurrentView('../pms-pages/rentalOwner.xhtml')}" />
+					<p:menuitem value="Property"
+						action="#{applicationBean.setCurrentView('../pms-pages/property.xhtml')}" />
 				</p:submenu>
 				<p:menuitem value="Open" url="#" />
 				<p:separator />
