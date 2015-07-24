@@ -9,9 +9,9 @@
 		<p:menubar>
 			<p:submenu label="File" icon="ui-icon-document">
 				<p:submenu label="Property Management" icon="ui-icon-contact">
-					<p:menuitem value="Rental Owner"
+					<p:menuitem value="Rental Owner" update="centerContentPanel" 
 						action="#{applicationBean.setCurrentView('../pms-pages/rentalOwner.xhtml')}" />
-					<p:menuitem value="Property"
+					<p:menuitem value="Property" update="centerContentPanel" 
 						action="#{applicationBean.setCurrentView('../pms-pages/property.xhtml')}" />
 				</p:submenu>
 				<p:menuitem value="Open" url="#" />
