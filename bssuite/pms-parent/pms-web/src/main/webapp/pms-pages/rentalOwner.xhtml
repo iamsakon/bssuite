@@ -18,10 +18,10 @@
 					<h:outputText value="#{messages.label_rental_owner} - #{messages.label_search}" />
 				</f:facet>
 
-				<h:panelGrid columns="4" cellpadding="5" >
-					<p:outputLabel for="name"
-						value="#{messages.label_rental_owner_name}:" />
-					<p:inputText id="name"
+				<p:panelGrid columns="4" cellpadding="1" columnClasses="label, value">
+					<p:outputLabel for="name2"
+						value="12345678" />
+					<p:inputText id="name2"
 						value="#{rentalOwnerController.criteria.name}" />
 					<p:outputLabel for="lastName"
 						value="#{messages.label_rental_owner_last_name}:" />
@@ -36,12 +36,12 @@
 					<p:inputText id="mobileNumber"
 						value="#{rentalOwnerController.criteria.mobileNumber}" />
 					<p:commandButton value="Search"
-						actionListener="#{rentalOwnerController.search}" />
+						actionListener="#{rentalOwnerController.search}" immediate="true" />
 					<p:commandButton value="Reset"
-						actionListener="#{rentalOwnerController.reset}" />
+						actionListener="#{rentalOwnerController.reset}" immediate="true" />
 					<p:commandButton value="Create" update="centerContentPanel"
-						actionListener="#{rentalOwnerController.openCreate}" />
-				</h:panelGrid>
+						actionListener="#{rentalOwnerController.openCreate}" immediate="true" />
+				</p:panelGrid>
 				<p:dataTable id="list" value="#{rentalOwnerController}"
 					var="rentalOwnerDomain" resizableColumns="false" paginator="true"
 					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
