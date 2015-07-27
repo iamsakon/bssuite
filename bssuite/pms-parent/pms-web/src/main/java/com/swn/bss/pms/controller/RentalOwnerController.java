@@ -53,7 +53,7 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	
 	@PostConstruct
 	public void search() {
-		this.load(1, 10, null, null, null);
+		//this.load(1, 10, null, null, null);
 	}
 
 	public void openViewMode() {
@@ -91,7 +91,6 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 
 	public void reset() {
 		criteria = new RentalOwnerDomain();
-		this.search();
 	}
 
 	public RentalOwnerService getRentalOwnerService() {

@@ -20,7 +20,7 @@
 
 				<p:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel for="name2"
-						value="12345678" />
+						value="#{messages.label_rental_owner_name}:" />
 					<p:inputText id="name2"
 						value="#{rentalOwnerController.criteria.name}" />
 					<p:outputLabel for="lastName"
@@ -36,7 +36,7 @@
 					<p:inputText id="mobileNumber"
 						value="#{rentalOwnerController.criteria.mobileNumber}" />
 					<p:commandButton value="Search"
-						actionListener="#{rentalOwnerController.search}" immediate="true" />
+						actionListener="#{rentalOwnerController.search}" immediate="false" />
 					<p:commandButton value="Reset"
 						actionListener="#{rentalOwnerController.reset}" immediate="true" />
 					<p:commandButton value="Create" update="centerContentPanel"
