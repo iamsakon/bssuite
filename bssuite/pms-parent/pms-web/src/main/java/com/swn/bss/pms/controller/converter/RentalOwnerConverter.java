@@ -3,6 +3,8 @@
  */
 package com.swn.bss.pms.controller.converter;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,7 +19,8 @@ import com.swn.bss.pms.entity.RentalOwnerDomain;
  * @author MrMai
  *
  */
-@FacesConverter
+@ManagedBean
+@RequestScoped
 public class RentalOwnerConverter implements Converter {
 
 	@Autowired
