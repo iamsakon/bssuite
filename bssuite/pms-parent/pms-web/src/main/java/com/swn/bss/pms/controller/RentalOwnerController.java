@@ -10,12 +10,9 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.swn.bss.pms.entity.RentalOwnerDomain;
@@ -28,14 +25,14 @@ import com.swn.bss.pms.services.RentalOwnerService;
 @Component
 @ManagedBean
 @SessionScoped
-public class RentalOwnerController extends AbstractMasterController<RentalOwnerDomain>
-		implements Serializable {
+public class RentalOwnerController extends
+		AbstractMasterController<RentalOwnerDomain> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4505793523777164945L;
-	
+
 	@Autowired
 	RentalOwnerService rentalOwnerService;
 
@@ -43,17 +40,17 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 
 	private RentalOwnerDomain criteria = new RentalOwnerDomain();
 
-	private List<RentalOwnerDomain> datasource;
+	private Page<RentalOwnerDomain> pageSearchResult;
 
-	public RentalOwnerController(){
+	public RentalOwnerController() {
 		searchScreen = "../pms-pages/rentalOwner.xhtml";
 		viewScreen = "../pms-pages/rentalOwnerView.xhtml";
 		editScreen = "../pms-pages/rentalOwnerEdit.xhtml";
 	}
-	
+
 	@PostConstruct
 	public void search() {
-		//this.load(1, 10, null, null, null);
+		// this.load(1, 10, null, null, null);
 	}
 
 	public void openViewMode() {
@@ -72,8 +69,8 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	public void openEdit() {
 		if (this.selectedValue != null && this.selectedValue.getOid() > 0) {
 			this.setCurrentView(this.editScreen);
-		}else{
-			//TODO In case selectedValue == null or oid = 0
+		} else {
+			// TODO In case selectedValue == null or oid = 0
 		}
 	}
 
@@ -101,21 +98,15 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 		this.rentalOwnerService = rentalOwnerService;
 	}
 
-	public List<RentalOwnerDomain> getDatasource() {
-		return datasource;
-	}
-
-	public void setDatasource(List<RentalOwnerDomain> datasource) {
-		this.datasource = datasource;
-	}
-
 	@Override
 	public RentalOwnerDomain getRowData(String rowKey) {
-		for (RentalOwnerDomain domain : datasource) {
-			if (("" + domain.getOid()).equals(rowKey))
-				return domain;
+		if (pageSearchResult != null
+				&& pageSearchResult.getContent().size() > 0) {
+			for (RentalOwnerDomain domain : pageSearchResult.getContent()) {
+				if (("" + domain.getOid()).equals(rowKey))
+					return domain;
+			}
 		}
-
 		return null;
 	}
 
@@ -125,20 +116,17 @@ public class RentalOwnerController extends AbstractMasterController<RentalOwnerD
 	}
 
 	public int getRowCount() {
-		//TOOD getRowCount()
-		return 1;
+		return pageSearchResult != null?pageSearchResult.getContent().size():0;
 	}
 
 	@Override
 	public List<RentalOwnerDomain> load(int first, int pageSize,
 			String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-
-		// datasource = rentalOwnerService.findRentalOwner(first, pageSize);
-		datasource = rentalOwnerService.findRentalOwner(criteria, first,
+		pageSearchResult = rentalOwnerService.findRentalOwner(criteria, first,
 				pageSize);
 		// TODO Add Feature filters
 		// TODO Add Feature sortOrder
-		return datasource;
+		return pageSearchResult.getContent();
 	}
 
 	public RentalOwnerDomain getCriteria() {

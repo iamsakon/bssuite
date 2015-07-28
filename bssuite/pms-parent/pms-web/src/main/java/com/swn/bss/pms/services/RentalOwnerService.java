@@ -4,7 +4,10 @@
 package com.swn.bss.pms.services;
 
 import com.swn.bss.pms.entity.RentalOwnerDomain;
+
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 /**
  * @author MrMai
@@ -69,7 +72,7 @@ public interface RentalOwnerService {
 	 * @param maxResult
 	 * @return
 	 */
-	public List<RentalOwnerDomain> findRentalOwner(RentalOwnerDomain domain,
+	public Page<RentalOwnerDomain> findRentalOwner(RentalOwnerDomain domain,
 			int firstResult, int maxResult);
 	
 	public List<RentalOwnerDomain> loadAll();

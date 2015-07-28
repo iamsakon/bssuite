@@ -117,7 +117,7 @@ public class RentalOwnerServiceImpl implements RentalOwnerService {
 						/ maxResults, maxResults)).getContent();
 	}
 
-	public List<RentalOwnerDomain> findRentalOwner(RentalOwnerDomain domain,
+	public Page<RentalOwnerDomain> findRentalOwner(RentalOwnerDomain domain,
 			int firstResult, int maxResults) {
 		PageRequest pageRequest = new PageRequest(firstResult / maxResults,
 				maxResults);
@@ -138,7 +138,7 @@ public class RentalOwnerServiceImpl implements RentalOwnerService {
 
 		Page<RentalOwnerDomain> pageResult = rentalOwnerRepository.findAll(
 				searchSpec, pageRequest);
-		return pageResult.getContent();
+		return pageResult;
 	}
 
 	public List<RentalOwnerDomain> loadAll() {
