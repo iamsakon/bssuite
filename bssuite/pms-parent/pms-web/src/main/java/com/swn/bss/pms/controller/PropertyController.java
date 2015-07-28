@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.swn.bss.pms.entity.PropertyDomain;
@@ -28,7 +29,8 @@ import com.swn.bss.pms.services.RentalOwnerService;
 @Component
 @ManagedBean
 @SessionScoped
-public class PropertyController extends AbstractMasterController<PropertyDomain> {	
+public class PropertyController extends
+		AbstractMasterController<PropertyDomain> {
 	/**
 	 * 
 	 */
@@ -40,34 +42,34 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 	PropertySubTypeService propertySubTypeService;
 	@Autowired
 	RentalOwnerService rentalOwnerService;
-	
+
 	private PropertyDomain selectedValue;
 
 	private PropertyDomain criteria = new PropertyDomain();
 
-	private List<PropertyDomain> datasource;
-	
-	//**************************
+	private Page<PropertyDomain> pageResult;
+
+	// **************************
 	List<RentalOwnerDomain> listRentalOwnerDomain;
 	List<PropertySubTypeDomain> listPropertySubType;
-	//**************************
-	
-	public PropertyController(){
+
+	// **************************
+
+	public PropertyController() {
 		searchScreen = "../pms-pages/property.xhtml";
 		viewScreen = "../pms-pages/propertyView.xhtml";
 		editScreen = "../pms-pages/propertyEdit.xhtml";
-	}	
-	
+	}
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		listRentalOwnerDomain = rentalOwnerService.loadAll();
 		listPropertySubType = propertySubTypeService.loadAll();
 		this.search();
 	}
-	
-	
+
 	public void search() {
-		this.load(1, 10, null, null, null);
+
 	}
 
 	public void openViewMode() {
@@ -86,8 +88,8 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 	public void openEdit() {
 		if (this.selectedValue != null && this.selectedValue.getOid() > 0) {
 			this.setCurrentView(this.editScreen);
-		}else{
-			//TODO In case selectedValue == null or oid = 0
+		} else {
+			// TODO In case selectedValue == null or oid = 0
 		}
 	}
 
@@ -95,7 +97,7 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 		this.selectedValue = new PropertyDomain();
 		this.setCurrentView(this.editScreen);
 	}
-	
+
 	public void saveRentalOwner() {
 		if (this.selectedValue != null) {
 			propertyService.saveProperty(this.selectedValue);
@@ -107,12 +109,14 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 		criteria = new PropertyDomain();
 		this.search();
 	}
-	
+
 	@Override
 	public PropertyDomain getRowData(String rowKey) {
-		for (PropertyDomain domain : datasource) {
-			if (("" + domain.getOid()).equals(rowKey))
-				return domain;
+		if (pageResult != null && pageResult.getContent() != null) {
+			for (PropertyDomain domain : pageResult.getContent()) {
+				if (("" + domain.getOid()).equals(rowKey))
+					return domain;
+			}
 		}
 		return null;
 	}
@@ -123,18 +127,16 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 	}
 
 	public int getRowCount() {
-		//TOOD getRowCount()
-		return 1;
+		return pageResult != null ? pageResult.getNumberOfElements() : 0;
 	}
 
 	@Override
-	public List<PropertyDomain> load(int first, int pageSize,
-			String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-		datasource = propertyService.findProperty(criteria, first,
-				pageSize);
+	public List<PropertyDomain> load(int first, int pageSize, String sortField,
+			SortOrder sortOrder, Map<String, Object> filters) {
+		pageResult = propertyService.findProperty(criteria, first, pageSize);
 		// TODO Add Feature filters
 		// TODO Add Feature sortOrder
-		return datasource;
+		return pageResult.getContent();
 	}
 
 	public PropertyService getPropertyService() {
@@ -159,14 +161,6 @@ public class PropertyController extends AbstractMasterController<PropertyDomain>
 
 	public void setCriteria(PropertyDomain criteria) {
 		this.criteria = criteria;
-	}
-
-	public List<PropertyDomain> getDatasource() {
-		return datasource;
-	}
-
-	public void setDatasource(List<PropertyDomain> datasource) {
-		this.datasource = datasource;
 	}
 
 	public List<RentalOwnerDomain> getListRentalOwnerDomain() {

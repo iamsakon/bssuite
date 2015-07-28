@@ -1,6 +1,6 @@
 package com.swn.bss.pms.services;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.swn.bss.pms.entity.PropertyDomain;
 
@@ -13,7 +13,7 @@ public interface PropertyService {
 
 	public PropertyDomain getProperty(Long id);
 
-	public List<PropertyDomain> findProperty(
+	public Page<PropertyDomain> findProperty(
 PropertyDomain domain, int firstResult, int maxResult);
 
 	public boolean deleteProperty(Long id);

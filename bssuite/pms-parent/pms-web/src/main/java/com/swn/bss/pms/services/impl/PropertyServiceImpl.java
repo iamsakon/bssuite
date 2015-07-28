@@ -3,8 +3,6 @@
  */
 package com.swn.bss.pms.services.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +45,7 @@ public class PropertyServiceImpl implements PropertyService {
 	/* (non-Javadoc)
 	 * @see com.swn.bss.pms.services.PropertyService#findProperty(com.swn.bss.pms.entity.PropertyDomain, int, int)
 	 */
-	public List<PropertyDomain> findProperty(PropertyDomain domain,
+	public Page<PropertyDomain> findProperty(PropertyDomain domain,
 			int firstResult, int maxResult) {
 		PageRequest pageRequest = new PageRequest(firstResult / maxResult,
 				maxResult);
@@ -69,7 +67,7 @@ public class PropertyServiceImpl implements PropertyService {
 		Page<PropertyDomain> pageResult = propertyRepository.findAll(
 				searchSpec, pageRequest);
 
-		return pageResult.getContent();
+		return pageResult;
 	}
 
 	/* (non-Javadoc)
