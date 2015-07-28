@@ -24,7 +24,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 
 	/**
      */
-	@NotNull
 	@Column(name = "created_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
@@ -32,7 +31,6 @@ public abstract class AbstractPmsDomain implements Serializable {
 
 	/**
      */
-	@NotNull
 	@Column(name = "created_by")
 	private long createdBy;
 
