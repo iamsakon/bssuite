@@ -32,7 +32,7 @@ public abstract class AbstractPmsDomain implements Serializable {
 	/**
      */
 	@Column(name = "created_by")
-	private long createdBy;
+	private Long createdBy;
 
 	/**
      */
@@ -44,7 +44,7 @@ public abstract class AbstractPmsDomain implements Serializable {
 	/**
      */
 	@Column(name = "updated_by")
-	private long updatedBy;
+	private Long updatedBy;
 
 	/**
 	 * Last Access IP
@@ -74,11 +74,11 @@ public abstract class AbstractPmsDomain implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public long getCreatedBy() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(long createdBy) {
+	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -90,11 +90,11 @@ public abstract class AbstractPmsDomain implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public long getUpdatedBy() {
+	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
-	public void setUpdatedBy(long updatedBy) {
+	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
