@@ -53,16 +53,10 @@
 						value="#{rentalOwnerController.selectedValue.comment}" />
 
 
-					<p:commandLink id="ajax-link-view-button"
-						update="centerContentPanel"
-						actionListener="#{rentalOwnerController.openSearch}">
-						<h:outputText value="backButton" />
-					</p:commandLink>
-
 					<p:commandButton value="Back"
 						actionListener="#{rentalOwnerController.openSearch}"
 						update="centerContentPanel" />
-					<p:commandButton value="Copy.."
+					<p:commandButton value="Edit"
 						actionListener="#{rentalOwnerController.openEdit}"
 						update="centerContentPanel" />
 				</p:panelGrid>

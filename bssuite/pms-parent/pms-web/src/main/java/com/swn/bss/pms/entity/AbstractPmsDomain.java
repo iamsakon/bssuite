@@ -147,13 +147,15 @@ public abstract class AbstractPmsDomain implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (createdBy ^ (createdBy >>> 32));
+		result = prime * result
+				+ ((createdBy == null) ? 0 : createdBy.hashCode());
 		result = prime * result
 				+ ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result
 				+ ((lastAccessIp == null) ? 0 : lastAccessIp.hashCode());
-		result = prime * result + (int) (updatedBy ^ (updatedBy >>> 32));
+		result = prime * result
+				+ ((updatedBy == null) ? 0 : updatedBy.hashCode());
 		result = prime * result
 				+ ((updatedDate == null) ? 0 : updatedDate.hashCode());
 		result = prime * result + version;
@@ -169,7 +171,10 @@ public abstract class AbstractPmsDomain implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractPmsDomain other = (AbstractPmsDomain) obj;
-		if (createdBy != other.createdBy)
+		if (createdBy == null) {
+			if (other.createdBy != null)
+				return false;
+		} else if (!createdBy.equals(other.createdBy))
 			return false;
 		if (createdDate == null) {
 			if (other.createdDate != null)
@@ -183,7 +188,10 @@ public abstract class AbstractPmsDomain implements Serializable {
 				return false;
 		} else if (!lastAccessIp.equals(other.lastAccessIp))
 			return false;
-		if (updatedBy != other.updatedBy)
+		if (updatedBy == null) {
+			if (other.updatedBy != null)
+				return false;
+		} else if (!updatedBy.equals(other.updatedBy))
 			return false;
 		if (updatedDate == null) {
 			if (other.updatedDate != null)
@@ -194,5 +202,7 @@ public abstract class AbstractPmsDomain implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }
