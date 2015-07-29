@@ -24,7 +24,7 @@ import com.swn.bss.pms.specification.RentalOwnerSpecifications;
  */
 @Service
 @Transactional
-public class RentalOwnerServiceImpl implements RentalOwnerService {
+public class RentalOwnerServiceImpl extends AbstractPmsServiceImpl implements RentalOwnerService {
 
 	@Autowired
 	RentalOwnerRepository rentalOwnerRepository;
@@ -36,8 +36,9 @@ public class RentalOwnerServiceImpl implements RentalOwnerService {
 	 * com.swn.bss.pms.services.RentalOwnerService#saveRentalOwner(com.swn.bss
 	 * .pms.entity.RentalOwnerDomain)
 	 */
-	public RentalOwnerDomain saveRentalOwner(RentalOwnerDomain rentalOwnerDomain) {
-		return rentalOwnerRepository.saveAndFlush(rentalOwnerDomain);
+	public RentalOwnerDomain saveRentalOwner(RentalOwnerDomain domain) {
+		domain =(RentalOwnerDomain) (domain.getOid()==null?this.assemblyCreateAuditor(domain):this.assemblyUpdateAuditor(domain));
+		return rentalOwnerRepository.saveAndFlush(domain);
 	}
 
 	/*

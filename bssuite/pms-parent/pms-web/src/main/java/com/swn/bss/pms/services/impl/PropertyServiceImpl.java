@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.swn.bss.pms.entity.PropertyDomain;
+import com.swn.bss.pms.entity.RentalOwnerDomain;
 import com.swn.bss.pms.repositories.PropertyRepository;
 import com.swn.bss.pms.services.PropertyService;
 import com.swn.bss.pms.specification.PropertySpecifications;
@@ -22,7 +23,7 @@ import com.swn.bss.pms.specification.PropertySpecifications;
  */
 @Service
 @Transactional
-public class PropertyServiceImpl implements PropertyService {
+public class PropertyServiceImpl extends AbstractPmsServiceImpl implements PropertyService {
 	
 	@Autowired
 	PropertyRepository propertyRepository;
@@ -31,6 +32,7 @@ public class PropertyServiceImpl implements PropertyService {
 	 * @see com.swn.bss.pms.services.PropertyService#saveProperty(com.swn.bss.pms.entity.PropertyDomain)
 	 */
 	public PropertyDomain saveProperty(PropertyDomain domain) {
+		domain =(PropertyDomain) (domain.getOid()==null?this.assemblyCreateAuditor(domain):this.assemblyUpdateAuditor(domain));
 		propertyRepository.save(domain);
 		return domain;
 	}
