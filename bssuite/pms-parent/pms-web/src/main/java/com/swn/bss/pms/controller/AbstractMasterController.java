@@ -4,6 +4,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.LazyDataModel;
+import com.swn.bss.pms.controller.util.MessageFactory;
 
 public class AbstractMasterController<T> extends LazyDataModel<T>{
 
@@ -19,6 +20,12 @@ public class AbstractMasterController<T> extends LazyDataModel<T>{
 	protected String editScreen = "";
 	
 	protected String backScreen = "";
+	
+	protected String createSuccessMessageId = "message_successfully_created";
+	
+	protected String updateSuccessMessageId = "message_successfully_updated";
+	
+	protected String deleteSuccessMessageId = "message_successfully_deleted";
 
 	protected void setCurrentView(String newView){
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -41,19 +48,19 @@ public class AbstractMasterController<T> extends LazyDataModel<T>{
 		this.backScreen = backScreen;
 	}
 	
-	public void info(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", message));
+	public void info(String messageId,Object... params) {
+		FacesContext.getCurrentInstance().addMessage(null,MessageFactory.getMessage(messageId, FacesMessage.SEVERITY_INFO, params));
     }
      
-    public void warn(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", message));
+    public void warn(String messageId,Object... params) {
+        FacesContext.getCurrentInstance().addMessage(null, MessageFactory.getMessage(messageId, FacesMessage.SEVERITY_WARN, params));
     }
      
-    public void error(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
+    public void error(String messageId,Object... params) {
+        FacesContext.getCurrentInstance().addMessage(null, MessageFactory.getMessage(messageId, FacesMessage.SEVERITY_ERROR, params));
     }
      
-    public void fatal(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", message));
+    public void fatal(String messageId,Object... params) {
+        FacesContext.getCurrentInstance().addMessage(null, MessageFactory.getMessage(messageId, FacesMessage.SEVERITY_FATAL, params));
     }
 }

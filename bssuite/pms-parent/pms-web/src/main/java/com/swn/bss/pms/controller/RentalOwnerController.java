@@ -80,9 +80,12 @@ public class RentalOwnerController extends
 	}
 
 	public void saveRentalOwner() {
+		Object[] params = {"Rental Owner"};
 		if (this.selectedValue != null) {
+			boolean flagNew = this.selectedValue.getOid() == null?true:false;
 			rentalOwnerService.saveRentalOwner(this.selectedValue);
-			this.openSearch();
+			this.info(flagNew?this.createSuccessMessageId:this.updateSuccessMessageId, params);
+			this.openViewMode();
 		}
 	}
 
