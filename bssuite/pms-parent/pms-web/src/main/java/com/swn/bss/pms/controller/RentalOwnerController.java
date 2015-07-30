@@ -89,6 +89,14 @@ public class RentalOwnerController extends
 		}
 	}
 
+	public void deleteRentalOwner(RentalOwnerDomain domain){
+		Object[] params = {"Rental Owner"};
+		if(domain != null){
+			rentalOwnerService.deleteRentalOwner(domain.getOid());
+			this.info(this.deleteSuccessMessageId, params);
+		}
+	}
+	
 	public void reset() {
 		criteria = new RentalOwnerDomain();
 	}

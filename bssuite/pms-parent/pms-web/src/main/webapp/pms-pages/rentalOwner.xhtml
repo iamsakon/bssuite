@@ -75,7 +75,7 @@
 							action="#{rentalOwnerController.openViewMode(rentalOwnerDomain)}">
 						</p:commandButton>
 						<p:commandButton id="deleteButton" icon="ui-icon-trash"
-							action="#{rentalOwnerController.openViewMode(rentalOwnerDomain)}"
+							action="#{rentalOwnerController.deleteRentalOwner(rentalOwnerDomain)}"
 							update="centerContentPanel">
 						</p:commandButton>
 						<p:tooltip for="deleteButton" value="#{messages.label_delete}"
