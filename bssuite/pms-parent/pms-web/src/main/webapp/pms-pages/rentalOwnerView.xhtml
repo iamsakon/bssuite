@@ -53,10 +53,10 @@
 						value="#{rentalOwnerController.selectedValue.comment}" />
 
 
-					<p:commandButton value="Back"
+					<p:commandButton value="#{messages.label_back}"
 						actionListener="#{rentalOwnerController.openSearch}"
 						update="centerContentPanel" />
-					<p:commandButton value="Edit"
+					<p:commandButton value="#{messages.label_edit}"
 						actionListener="#{rentalOwnerController.openEdit}"
 						update="centerContentPanel" />
 				</p:panelGrid>

@@ -35,11 +35,11 @@
 						value="#{messages.label_rental_owner_mobile_number}:" />
 					<p:inputText id="mobileNumber"
 						value="#{rentalOwnerController.criteria.mobileNumber}" />
-					<p:commandButton value="Search"
+					<p:commandButton value="#{messages.label_search}"
 						actionListener="#{rentalOwnerController.search}" immediate="false" />
-					<p:commandButton value="Reset"
+					<p:commandButton value="#{messages.label_reset}"
 						actionListener="#{rentalOwnerController.reset}" immediate="false" />
-					<p:commandButton value="Create" update="centerContentPanel"
+					<p:commandButton value="#{messages.label_create}" update="centerContentPanel"
 						actionListener="#{rentalOwnerController.openCreate}" immediate="true" />
 				</p:panelGrid>
 				<p:dataTable id="list" value="#{rentalOwnerController}"
@@ -68,7 +68,7 @@
 					</p:column>
 					<p:column styleClass="action-column">
 						<f:facet name="header">
-							<h:outputText value="Actions" />
+							<h:outputText value="#{messages.label_actions}" />
 						</f:facet>
 						<p:commandButton id="viewButton" icon="ui-icon-view"
 							update="centerContentPanel"
