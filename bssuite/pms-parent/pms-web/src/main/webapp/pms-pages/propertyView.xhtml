@@ -16,7 +16,39 @@
 			</f:facet>
 			<p:outputPanel id="valueView" style="text-align:center;">
 				<p:panelGrid columns="2" columnClasses="label,value">
+					<p:outputLabel for="code" value="#{messages.label_property_code}:" />
+					<p:inputText id="code" maxlength="50" required="true"
+						value="#{propertyController.selectedValue.code}" />
+					<p:outputLabel for="name" value="#{messages.label_property_name}:" />
+					<p:inputText id="name" maxlength="50"
+						value="#{propertyController.selectedValue.name}" />
 
+					<p:outputLabel for="addressline1"
+						value="#{messages.label_property_address_line_1}:" />
+					<p:inputText id="addressline1" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine1}" />
+					<p:outputLabel for="addressline2"
+						value="#{messages.label_property_address_line_2}:" />
+					<p:inputText id="addressline2" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine2}" />
+					<p:outputLabel for="addressline3"
+						value="#{messages.label_property_address_line_3}:" />
+					<p:inputText id="addressline3" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine3}" />
+					<p:outputLabel for="city" value="#{messages.label_property_city}:" />
+					<p:inputText id="city" maxlength="50"
+						value="#{propertyController.selectedValue.city}" />
+					<p:outputLabel for="zipcode"
+						value="#{messages.label_property_zipcode}:" />
+					<p:inputText id="zipcode" maxlength="50"
+						value="#{propertyController.selectedValue.city}" />
+
+					<p:commandButton value="#{messages.label_back}"
+						actionListener="#{propertyController.openSearch}"
+						update="centerContentPanel" />
+					<p:commandButton value="#{messages.label_edit}"
+						actionListener="#{propertyController.openEdit}"
+						update="centerContentPanel" />
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:panel>

@@ -44,21 +44,18 @@ public class PropertyDomain extends AbstractPmsDomain {
     /**
      * Property name
      */
-    @NotNull
     @Column(name = "name")
     @Size(max = 128)
 	private String name;
     /**
      * Property address line 1
      */
-    @NotNull
     @Column(name = "address_line_1")
     @Size(max = 128)
 	private String addressLine1;
     /**
      * Property address line 2
      */
-    @NotNull
     @Column(name = "address_line_2")
     @Size(max = 128)
 	private String addressLine2;
@@ -66,7 +63,6 @@ public class PropertyDomain extends AbstractPmsDomain {
     /**
      * Property address line 3
      */
-    @NotNull
     @Column(name = "address_line_3")
     @Size(max = 128)
 	private String addressLine3;
@@ -74,19 +70,16 @@ public class PropertyDomain extends AbstractPmsDomain {
     /**
      * Property city locate
      */
-    @NotNull
     @Column(name = "city")
     @Size(max = 128)
     private String city;
     /**
      * Property zipcode
      */
-    @NotNull
     @Column(name = "zipcode")
     @Size(max = 128)
     private String zipcode;
     
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private PropertySubTypeDomain propertySubType;
     @NotNull

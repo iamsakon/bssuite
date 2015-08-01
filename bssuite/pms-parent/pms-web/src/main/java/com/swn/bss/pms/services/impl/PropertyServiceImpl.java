@@ -23,29 +23,43 @@ import com.swn.bss.pms.specification.PropertySpecifications;
  */
 @Service
 @Transactional
-public class PropertyServiceImpl extends AbstractPmsServiceImpl implements PropertyService {
-	
+public class PropertyServiceImpl extends AbstractPmsServiceImpl implements
+		PropertyService {
+
 	@Autowired
 	PropertyRepository propertyRepository;
-	
-	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertyService#saveProperty(com.swn.bss.pms.entity.PropertyDomain)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.swn.bss.pms.services.PropertyService#saveProperty(com.swn.bss.pms
+	 * .entity.PropertyDomain)
 	 */
 	public PropertyDomain saveProperty(PropertyDomain domain) {
-		domain =(PropertyDomain) (domain.getOid()==null?this.assemblyCreateAuditor(domain):this.assemblyUpdateAuditor(domain));
+		domain = (PropertyDomain) (domain.getOid() == null ? this
+				.assemblyCreateAuditor(domain) : this
+				.assemblyUpdateAuditor(domain));
 		propertyRepository.save(domain);
 		return domain;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertyService#getPropertyType(java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.swn.bss.pms.services.PropertyService#getPropertyType(java.lang.Long)
 	 */
 	public PropertyDomain getProperty(Long id) {
 		return propertyRepository.findOne(id);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertyService#findProperty(com.swn.bss.pms.entity.PropertyDomain, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.swn.bss.pms.services.PropertyService#findProperty(com.swn.bss.pms
+	 * .entity.PropertyDomain, int, int)
 	 */
 	public Page<PropertyDomain> findProperty(PropertyDomain domain,
 			int firstResult, int maxResult) {
@@ -53,18 +67,26 @@ public class PropertyServiceImpl extends AbstractPmsServiceImpl implements Prope
 				maxResult);
 
 		Specification<PropertyDomain> codeLikeSpec = PropertySpecifications
-				.codeLike(domain.getName(), 1);
+				.codeLike(domain.getCode(), 1);
 
 		Specification<PropertyDomain> nameLikeSpec = PropertySpecifications
 				.nameLike(domain.getName(), 1);
 
 		Specification<PropertyDomain> zipcodeLikeSpec = PropertySpecifications
-				.zipcodeLike(domain.getName(), 1);
-		
+				.zipcodeLike(domain.getZipcode(), 1);
+
 		Specification<PropertyDomain> dataActiveSpec = PropertySpecifications
 				.active();
+
+		Specification<PropertyDomain> joinRentalOwner = PropertySpecifications
+				.joinRentalOwner(domain.getRentalOwner());
+
+		Specification<PropertyDomain> joinPropertySubType = PropertySpecifications
+				.joinPropertySubType(domain.getPropertySubType());
+
 		Specification<PropertyDomain> searchSpec = Specifications
-				.where(codeLikeSpec).and(nameLikeSpec).and(zipcodeLikeSpec).and(dataActiveSpec);
+				.where(codeLikeSpec).and(nameLikeSpec).and(zipcodeLikeSpec)
+				.and(dataActiveSpec);
 
 		Page<PropertyDomain> pageResult = propertyRepository.findAll(
 				searchSpec, pageRequest);
@@ -72,8 +94,11 @@ public class PropertyServiceImpl extends AbstractPmsServiceImpl implements Prope
 		return pageResult;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.swn.bss.pms.services.PropertyService#deleteProperty(java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.swn.bss.pms.services.PropertyService#deleteProperty(java.lang.Long)
 	 */
 	public boolean deleteProperty(Long id) {
 		boolean result = false;

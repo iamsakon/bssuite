@@ -13,8 +13,63 @@
 					value="#{messages.label_property} - #{messages.label_edit}" />
 			</f:facet>
 			<p:outputPanel id="valueView" style="text-align:center;">
-				<p:panelGrid columns="2">
+				<p:panelGrid columns="2" columnClasses="label,value">
+					<p:outputLabel for="rentalOwner"
+						value="#{messages.label_rental_owner}:" />
+					<p:selectOneMenu id="rentalOwner"
+						converter="#{rentalOwnerConverter}"
+						value="#{propertyController.selectedValue.rentalOwner}"
+						required="true">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}" />
+						<f:selectItems value="#{propertyController.listRentalOwner}"
+							var="rentalOwner" itemLabel="#{rentalOwner.name}"
+							itemValue="#{rentalOwner}" />
+					</p:selectOneMenu>
 
+					<p:outputLabel for="propertySubType"
+						value="#{messages.label_property_sub_type}:" />
+					<p:selectOneMenu id="propertySubType"
+						converter="#{propertySubTypeConverter}"
+						value="#{propertyController.selectedValue.propertySubType}"
+						required="false">
+						<f:selectItem  itemLabel="Select One" itemValue="#{null}" />
+						<f:selectItems value="#{propertyController.listPropertySubType}"
+							var="propertySubType" itemLabel="#{propertySubType.name}"
+							itemValue="#{propertySubType}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="code" value="#{messages.label_property_code}:" />
+					<p:inputText id="code" maxlength="50" required="true"
+						value="#{propertyController.selectedValue.code}" />
+					<p:outputLabel for="name" value="#{messages.label_property_name}:" />
+					<p:inputText id="name" maxlength="50"
+						value="#{propertyController.selectedValue.name}" />
+
+					<p:outputLabel for="addressline1"
+						value="#{messages.label_property_address_line_1}:" />
+					<p:inputText id="addressline1" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine1}" />
+					<p:outputLabel for="addressline2"
+						value="#{messages.label_property_address_line_2}:" />
+					<p:inputText id="addressline2" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine2}" />
+					<p:outputLabel for="addressline3"
+						value="#{messages.label_property_address_line_3}:" />
+					<p:inputText id="addressline3" maxlength="50"
+						value="#{propertyController.selectedValue.addressLine3}" />
+					<p:outputLabel for="city" value="#{messages.label_property_city}:" />
+					<p:inputText id="city" maxlength="50"
+						value="#{propertyController.selectedValue.city}" />
+					<p:outputLabel for="zipcode" value="#{messages.label_property_zipcode}:" />
+					<p:inputText id="zipcode" maxlength="50"
+						value="#{propertyController.selectedValue.city}" />
+
+					<p:commandButton value="#{messages.label_save}"
+						action="#{propertyController.saveProperty}"
+						update="centerContentPanel" />
+					<p:commandButton value="#{messages.label_cancel}"
+						action="#{propertyController.openSearch}"
+						update="centerContentPanel" immediate="true" />
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:panel>

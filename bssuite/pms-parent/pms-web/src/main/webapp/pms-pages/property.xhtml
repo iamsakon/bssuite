@@ -10,30 +10,98 @@
 		<p:growl id="growl" showDetail="false" />
 	</h:form>
 	<p:fragment autoUpdate="true">
-		<h:form prependId="false" id="dataForm">
+		<h:form prependId="false" id="propertyDataForm">
 			<p:panel id="data" toggleable="true" toggleSpeed="250">
 				<f:facet name="header">
 					<h:outputText
 						value="#{messages.label_property} - #{messages.label_search}" />
 				</f:facet>
 				<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
-					<p:outputLabel for="code"
-						value="#{messages.label_property_code}:" />
-					<p:inputText id="code"
-						value="#{propertyController.criteria.code}" />
-				
-				<p:outputLabel for="name"
-					value="#{messages.label_property_name}:" />
-				<p:inputText id="name"
-					value="#{propertyController.criteria.name}" />
+					<h:outputLabel for="rentalOwner"
+						value="#{messages.label_rental_owner}:" />
+					<p:selectOneMenu id="rentalOwner" required="false"
+						converter="#{rentalOwnerConverter}"
+						value="#{propertyController.criteriaRentalOwner}">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="false" />
+						<f:selectItems value="#{propertyController.listRentalOwner}"
+							var="rentalOwner" itemLabel="#{rentalOwner.name}"
+							itemValue="#{rentalOwner}" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="propertySubType"
+						value="#{messages.label_property_sub_type}:" />
+					<p:selectOneMenu id="propertySubType"
+						converter="#{propertySubTypeConverter}"
+						value="#{propertyController.criteriaPropertySubType}"
+						required="false">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}" />
+						<f:selectItems value="#{propertyController.listPropertySubType}"
+							var="propertySubType" itemLabel="#{propertySubType.name}"
+							itemValue="#{propertySubType}" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="code" value="#{messages.label_property_code}:" />
+					<p:inputText id="code" value="#{propertyController.criteria.code}" />
+					<p:outputLabel for="name" value="#{messages.label_property_name}:" />
+					<p:inputText id="name" value="#{propertyController.criteria.name}" />
+					<p:outputLabel for="city" value="#{messages.label_property_city}:" />
+					<p:inputText id="city" maxlength="50"
+						value="#{propertyController.criteria.city}" />
+					<p:outputLabel for="zipcode"
+						value="#{messages.label_property_zipcode}:" />
+					<p:inputText id="zipcode" maxlength="50"
+						value="#{propertyController.criteria.zipcode}" />
+
+					<p:commandButton value="#{messages.label_search}"
+						actionListener="#{propertyController.search}" />
+					<p:commandButton value="#{messages.label_reset}"
+						actionListener="#{propertyController.reset}" immediate="false" />
+					<p:commandButton value="#{messages.label_create}"
+						update="centerContentPanel"
+						actionListener="#{propertyController.openCreate}" immediate="true" />
+
 				</h:panelGrid>
-				<p:dataTable id="list" value="#{propertyController}"
-					var="propertyDomain" resizableColumns="false" paginator="true"
+				<p:dataTable id="list" value="#{propertyController}" var="property"
+					resizableColumns="false" paginator="true"
 					paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					selectionMode="single"
 					selection="#{propertyController.selectedValue}"
 					rowsPerPageTemplate="5,10,25,50" rows="10" lazy="true">
 
+					<p:column headerText="#{messages.label_rental_owner}">
+						<p:outputLabel value="#{property.rentalOwner.name}" />
+					</p:column>
+					<p:column headerText="#{messages.label_property_sub_type}">
+						<p:outputLabel value="#{property.propertySubType.name}" />
+					</p:column>
+					<p:column headerText="#{messages.label_property_code}">
+						<p:outputLabel value="#{property.code}" />
+					</p:column>
+					<p:column headerText="#{messages.label_property_name}">
+						<p:outputLabel value="#{property.name}" />
+					</p:column>
+					<p:column headerText="#{messages.label_property_city}">
+						<p:outputLabel value="#{property.city}" />
+					</p:column>
+					<p:column headerText="#{messages.label_property_zipcode}">
+						<p:outputLabel value="#{property.zipcode}" />
+					</p:column>
+					<p:column styleClass="action-column">
+						<f:facet name="header">
+							<h:outputText value="#{messages.label_actions}" />
+						</f:facet>
+						<p:commandButton id="viewButton" icon="ui-icon-view"
+							update="centerContentPanel"
+							action="#{propertyController.openViewMode(property)}">
+						</p:commandButton>
+						<p:commandButton id="deleteButton" icon="ui-icon-trash"
+							action="#{propertyController.deleteProperty(property)}"
+							update="centerContentPanel">
+						</p:commandButton>
+						<p:tooltip for="deleteButton" value="#{messages.label_delete}"
+							showEffect="fade" hideEffect="fade" />
+
+					</p:column>
 				</p:dataTable>
 			</p:panel>
 		</h:form>

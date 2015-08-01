@@ -54,7 +54,7 @@ public class RentalOwnerController extends
 	}
 
 	public void openViewMode() {
-		this.setCurrentView(this.searchScreen);
+		this.setCurrentView(this.viewScreen);
 	}
 
 	public void openViewMode(RentalOwnerDomain selectedValue) {
