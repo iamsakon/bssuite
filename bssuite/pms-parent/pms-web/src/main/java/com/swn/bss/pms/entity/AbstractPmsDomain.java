@@ -45,6 +45,13 @@ public abstract class AbstractPmsDomain implements Serializable {
      */
 	@Column(name = "updated_by")
 	private Long updatedBy;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Date deletedDate;
+	
+	@Column(name="deleted_by")
+	private Long deletedBy;
 
 	/**
 	 * Last Access IP
@@ -201,6 +208,22 @@ public abstract class AbstractPmsDomain implements Serializable {
 		if (version != other.version)
 			return false;
 		return true;
+	}
+
+	public Date getDeletedDate() {
+		return deletedDate;
+	}
+
+	public void setDeletedDate(Date deletedDate) {
+		this.deletedDate = deletedDate;
+	}
+
+	public Long getDeletedBy() {
+		return deletedBy;
+	}
+
+	public void setDeletedBy(Long deletedBy) {
+		this.deletedBy = deletedBy;
 	}
 
 
