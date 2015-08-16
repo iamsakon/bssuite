@@ -21,7 +21,7 @@ import com.swn.bss.pms.entity.RentalOwnerDomain;
  * @author MrMai
  *
  */
-public class PropertySpecifications {
+public class PropertySpecifications extends AbstractSpecification{
 
 	public static Specification<PropertyDomain> codeLike(final String name,
 			final long type) {
@@ -118,10 +118,4 @@ public class PropertySpecifications {
 		};
 	}
 
-	private static String getLikePattern(final String searchTerm) {
-		StringBuilder pattern = new StringBuilder();
-		pattern.append((searchTerm == null ? "" : searchTerm).toLowerCase());
-		pattern.append("%");
-		return pattern.toString();
-	}
 }

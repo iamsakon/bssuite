@@ -66,11 +66,15 @@ public class PropertyServiceImpl extends AbstractPmsServiceImpl implements
 		PageRequest pageRequest = new PageRequest(firstResult / maxResult,
 				maxResult);
 
-		Specification<PropertyDomain> codeLikeSpec = PropertySpecifications
-				.codeLike(domain.getCode(), 1);
+		Specification<PropertyDomain> codeLikeSpec = null;
+		if (domain != null && domain.getCode() != null
+				&& !domain.getCode().equals(""))
+			codeLikeSpec = PropertySpecifications.codeLike(domain.getCode(), 1);
 
-		Specification<PropertyDomain> nameLikeSpec = PropertySpecifications
-				.nameLike(domain.getName(), 1);
+		Specification<PropertyDomain> nameLikeSpec = null;
+		if (domain != null && domain.getName() != null
+				&& !domain.getName().equals(""))
+			nameLikeSpec = PropertySpecifications.nameLike(domain.getName(), 1);
 
 		Specification<PropertyDomain> zipcodeLikeSpec = PropertySpecifications
 				.zipcodeLike(domain.getZipcode(), 1);
